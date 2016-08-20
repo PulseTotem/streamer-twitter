@@ -1,0 +1,9 @@
+.idea
+node_modules
+core-repos-config.json
+scripts/database/connection_infos.json
+scripts/core/streamer_config.json
+t6s-core/*
+package-bak.json
+package-tmp.json
+build
