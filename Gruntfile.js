@@ -63,6 +63,9 @@ module.exports = function (grunt) {
             buildConnectionInfosFile: {
                 files: 	[{'build/js/connection_infos.json': 'scripts/database/connection_infos.json'}]
             },
+            buildStreamerConfigFile: {
+              files: 	[{'build/js/streamer_config.json': 'scripts/core/streamer_config.json'}]
+            },
             buildPackageBak: {
                 files: 	[{'package-bak.json': 'package.json'}]
             },
@@ -221,7 +224,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', function () {
         grunt.task.run(['clean:package', 'clean:build']);
 
-        grunt.task.run(['env:build','update_json:packageBuild', 'copy:buildPackageBak', 'copy:buildPackageReplace', 'npm-install', 'copy:keepPackage', 'copy:buildPackageReinit', 'copy:buildConnectionInfosFile', 'typescript:build', 'clean:package']);
+        grunt.task.run(['env:build','update_json:packageBuild', 'copy:buildPackageBak', 'copy:buildPackageReplace', 'npm-install', 'copy:keepPackage', 'copy:buildPackageReinit', 'copy:buildConnectionInfosFile', 'copy:buildStreamerConfigFile', 'typescript:build', 'clean:package']);
     });
 
     grunt.registerTask('develop', ['build', 'express:build', 'watch']);
