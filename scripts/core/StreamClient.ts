@@ -18,10 +18,10 @@ class StreamClient {
 	 * StreamClient's oAuthkey.
 	 *
 	 * @property _oAuthkey
-	 * @type string
+	 * @type any
 	 * @private
 	 */
-	private _oAuthkey : string;
+	private _oAuthkey : any;
 
 	/**
 	 * StreamClient.
@@ -69,9 +69,9 @@ class StreamClient {
 	 * Set OAuthkey variable.
 	 *
 	 * @method setOAuthKey
-	 * @param {string} oAuthKey - New OAuthKey string.
+	 * @param {any} oAuthKey - New OAuthKey string.
 	 */
-	setOAuthKey(oAuthkey : string) {
+	setOAuthKey(oAuthkey : any) {
 		this._oAuthkey = oAuthkey;
 	}
 
@@ -87,16 +87,24 @@ class StreamClient {
 
 		self._initOK = true;
 
-		var token = JSON.parse(this._oAuthkey);
+		if(typeof(this._oAuthkey) == "string") {
+			this._oAuthkey = JSON.parse(this._oAuthkey);
+		}
+
+		var token = this._oAuthkey;
 		var tokenKey = token.oauth_token;
 		var tokenSecret = token.oauth_token_secret;
 
-		this._streamClient = new NodeTweetStream({
-				consumer_key: StreamerConfig.getConsumerKey(),
-				consumer_secret: StreamerConfig.getConsumerSecret(),
-				token: tokenKey,
-				token_secret: tokenSecret
-			});
+		var nodeTweetStreamConfig = {
+			consumer_key: StreamerConfig.getConsumerKey(),
+			consumer_secret: StreamerConfig.getConsumerSecret(),
+			token: tokenKey,
+			token_secret: tokenSecret
+		};
+
+		Logger.debug(nodeTweetStreamConfig);
+
+		this._streamClient = new NodeTweetStream(nodeTweetStreamConfig);
 
 		this._streamClient.on('tweet', function (tweet) {
 			console.log(tweet);

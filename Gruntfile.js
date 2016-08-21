@@ -83,7 +83,7 @@ module.exports = function (grunt) {
         typescript: {
             build: {
                 src: [
-                    'scripts/Twitter.ts'
+                    'scripts/StreamerTwitter.ts'
                 ],
                 dest: 'build/js/Streamer.js',
                 options: {

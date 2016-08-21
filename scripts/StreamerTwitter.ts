@@ -12,10 +12,10 @@
 /**
  * Represents PulseTotem's Twitter Streamer.
  *
- * @class Twitter
+ * @class StreamerTwitter
  * @extends Server
  */
-class Twitter extends Server {
+class StreamerTwitter extends Server {
 	/**
 	 * Constructor.
 	 *
@@ -79,5 +79,5 @@ var _TwitterListeningPort : number = process.env.PORT || 15000;
  */
 var _TwitterArguments : Array<string> = process.argv;
 
-var serverInstance : Twitter = new Twitter(_TwitterListeningPort, _TwitterArguments);
+var serverInstance : StreamerTwitter = new StreamerTwitter(_TwitterListeningPort, _TwitterArguments);
 serverInstance.run();
